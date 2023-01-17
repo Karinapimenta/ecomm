@@ -1,0 +1,5 @@
+db.products.find().forEach(function(produto){
+    info = db.categories.find({nome:produto.categoria},{_id:1,nome:1,status:1}).toArray();
+    db.products.updateMany({categoria:info[0].nome},{$set:{categoria:info[0]}});
+})
+    
