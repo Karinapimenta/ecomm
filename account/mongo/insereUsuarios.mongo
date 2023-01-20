@@ -1,0 +1,57 @@
+db.users.insertOne({
+    name: "Karina",
+    email: "karina@company.com",
+    password:"$2y$10$6jPr7tnWsfPrtfrvqnhGp.MTlxRwh5WegiQuEPduAYZo6fO/WHGGG",
+    date: ISODate(),
+    cpf: "71986318001",
+    phone: "31978945621",
+    address:[{
+        street: "Rua 123",
+        number: "23",
+        complement: "apt 123",
+        neighborhood: "neighborhood 1",
+        zipCode: 35400000,
+        city: "OP",
+        state: "MG",
+}],
+    shoppingCart:[],
+})
+
+db.users.insertMany([
+{
+    name: "Tomás Henrique Rafael Galvão",
+    email: "tomas-galvao96@daimler.com",
+    password:"$2y$10$vu2vBtLLo4RlPox94xM7quCDYCAuDfVIh4zfEwzULp3MjqK/Cv8..",
+    date: ISODate(),
+    cpf: "00807646733",
+    phone: "31911215661",
+    address:[{
+        street: "Rua Dezesseis",
+        number: "738",
+        complement: "N",
+        neighborhood: "Angelim",
+        zipCode: 64041320,
+        city: "Teresina",
+        state: "PI",
+    }],
+    shoppingCart:[],
+},
+{
+    name: "Silvana Gabriela Rayssa Assis",
+    email: "silvana-assis89@splicenet.com.br",
+    password:"$2y$10$mhGXKeNXbw3kINEj3yDiluWhEJUC6W.JSm.KCXLXQjXXvqpElJe92",
+    date: ISODate(),
+    cpf: "90382829409",
+    phone: "31985444541",
+    address:[{
+        street: "Beco A",
+        number: 125,
+        complement: "apt 123",
+        neighborhood: "Piratininga (Venda Nova)",
+        zipCode: 31540083,
+        city: "Belo Horizonte",
+        state: "MG",
+    }],
+    shoppingCart:[],
+}
+]);
