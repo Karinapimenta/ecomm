@@ -1,0 +1,66 @@
+let customerCPF = "00807646733";
+let productSlug = "tablet-galaxy-tab-s8";
+let amount = 2;
+let flag = false;
+use ('ecomm-product')
+let product1 = db.products2.findOneAndUpdate(
+    {
+        slug:productSlug,
+        quantityInStock:{
+            $gte:amount
+        }
+    },{
+        $inc:{
+            quantityInStock:-2
+        }
+    },{
+        projection:{
+            _id:0,
+            product:1,
+            pricePerUnit:1
+        }
+})
+product1.quantity = amount;
+product1.discountPercentage = 10;
+product1.finalPrice = NumberDecimal((product1.quantity * (product1.pricePerUnit- ((product1.pricePerUnit / 100) * product1.discountPercentage))).toFixed(2));
+console.log(product1)
+
+if((product1 != null)){
+    flag = true;
+use ('ecomm-account')
+db.users.updateOne({
+    cpf:customerCPF
+},{
+    $push:{
+        "shoppingCart":{
+            $each:[product1]
+        }
+    }
+})
+} else {
+    flag=false;
+    console.log("PRODUTO FORA DE ESTOQUE!")
+}
+
+if (flag==true){
+    let clientData = db.users.findOne({
+        cpf:customerCPF
+    },{
+        _id:1, name:1, address:1, shoppingCart:1
+    })
+    use('ecomm-order')
+        db.orders.insertOne({
+        date: new Date(),
+        customer:{
+            _id:clientData._id,
+            client:clientData.name
+        },
+        deliveryAddress: clientData.address[0],
+        orderedItems: clientData.shoppingCart,
+    })
+    use('ecomm-account')
+    db.users.updateOne({cpf:customerCPF},{$set:{"shoppingCart":[]}})
+console.log("PEDIDO REALIZADO COM SUCESSO")
+} else {
+    console.log("LAMENTAMOS, PORÉM CONFIRA NOSSA LISTA DE PRODUTOS NOVAMENTE")
+}

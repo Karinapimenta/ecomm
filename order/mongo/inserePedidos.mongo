@@ -1,0 +1,88 @@
+let customerCPF = "71986318001";
+let productSlug = "livro-refactoring";
+let flag = false;
+use ('ecomm-product')
+let product1 = db.products2.findOneAndUpdate(
+    {
+        slug:productSlug,
+        quantityInStock:{
+            $gt:0
+        }
+    },{
+        $inc:{
+            quantityInStock:-1
+        }
+    },{
+        projection:{
+            _id:0,
+            product:1,
+            pricePerUnit:1
+        }
+})
+product1.quantity = 1;
+product1.discountPercentage = 10;
+product1.finalPrice = NumberDecimal((product1.quantity * (product1.pricePerUnit- ((product1.pricePerUnit / 100) * product1.discountPercentage))).toFixed(2));
+console.log(product1)
+
+let product2 = db.products2.findOneAndUpdate(
+    {
+        slug:"livro-clean",
+        quantityInStock:{
+            $gt:0
+        }
+    },{
+        $inc:{
+            quantityInStock:-1
+        }
+    },{
+        projection:{
+            _id:0,
+            product:1,
+            pricePerUnit:1
+        }
+})
+product2.quantity = 1;
+product2.discountPercentage = 15;
+product2.finalPrice = NumberDecimal((product2.quantity * (product2.pricePerUnit- ((product2.pricePerUnit / 100) * product2.discountPercentage))).toFixed(2));
+console.log(product2)
+
+if((product1 != null) && (product2 != null)){
+    flag = true;
+use ('ecomm-account')
+db.users.updateOne({
+    cpf:customerCPF
+},{
+    $push:{
+        "shoppingCart":{
+            $each:[product1,product2]
+        }
+    }
+})
+} else {
+    flag=false;
+    console.log("PRODUTO FORA DE ESTOQUE!")
+}
+
+
+if (flag==true){
+    let clientData = db.users.findOne({
+        cpf:customerCPF
+    },{
+        _id:1, name:1, address:1, shoppingCart:1
+    })
+    use('ecomm-order')
+        db.orders.insertOne({
+        date: new Date(),
+        customer:{
+            _id:clientData._id,
+            client:clientData.name
+        },
+        deliveryAddress: clientData.address[0],
+        orderedItems: clientData.shoppingCart,
+    })
+    use('ecomm-account')
+    db.users.updateOne({cpf:customerCPF},{$set:{"shoppingCart":[]}})
+console.log("PEDIDO REALIZADO COM SUCESSO")
+} else {
+    console.log("LAMENTAMOS, PORÉM CONFIRA NOSSA LISTA DE PRODUTOS NOVAMENTE")
+}

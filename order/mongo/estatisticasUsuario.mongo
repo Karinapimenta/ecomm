@@ -1,0 +1,36 @@
+db.orders.aggregate([{
+$match: {
+    "customer._id": ObjectId("63cabd096c9c7c42905a06e0")
+}
+},{
+    $unwind:"$orderedItems"
+},{
+    $group:{
+        "_id": "orderedItems",
+        price:{
+            $sum:"$orderedItems.pricePerUnit"
+        },
+        quantity:{
+            $sum:"$orderedItems.quantity"
+        },
+        finalPrice:{
+            $sum:"$orderedItems.finalPrice"
+        }
+    }
+},{
+    "$project": {
+        _id:0,
+
+        totalPrice:"$price",
+        totalQuantity:"$quantity",
+        totalDiscount:{
+            $round:[{
+                $subtract:["$price","$finalPrice"]
+            },2]
+        },
+        finalPrice:"$finalPrice"
+    }
+},{
+    $out: "statistics"
+}
+]).pretty();
