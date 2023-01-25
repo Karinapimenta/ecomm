@@ -1,0 +1,87 @@
+openapi: 3.0.1
+info:
+  title: Ecomm Project
+  version: 0.0.1
+  contact:
+    name: Customer Support
+    email: nxtdev@example.com
+servers:
+- url: https://63d0272410982404378e4874.mockapi.io
+  description: Categories
+paths:
+  /Categories:
+    get:
+      summary: Retrieve categories
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/Category"
+        401:
+          description: No category registered
+          content:
+            application/json:
+              example: "Not Found"
+  /Categories/{id}:
+    get:
+      summary: Detailing of a category by its Ids
+      parameters:
+      - name: id
+        in: path
+        schema:
+         type: string
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        404:
+          description: The category doesn't exist
+          content:
+            application/json:
+              example: "Not Found"
+  /api/admin/Categories:
+    post:
+      tags:
+        - admin
+      summary: Registration of new Categories
+      description: "only administrative users will be able to access this endpoint to register new categories"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+             type: object
+             properties:
+              name:
+               type: string
+      responses:
+        201: 
+          description: Created
+          content:
+           application/json:
+            schema:
+             $ref: "#/components/schemas/Category"
+        401:
+          description: Access Denied
+          content:
+            application/json:
+              example: "Unauthorized"
+components:
+  schemas:
+    Category:
+      type: object
+      properties:
+        name:
+          type: string
+        status:
+          type: boolean
+        id:
+          type: string
