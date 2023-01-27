@@ -1,0 +1,149 @@
+openapi: 3.0.1
+info:
+  title: Ecomm Project
+  version: 0.0.1
+  contact:
+    name: Customer Support
+    email: nxtdev@example.com
+servers:
+- url: https://63d29ca806556a0fdd40bb13.mockapi.io/
+paths:
+  /api/accounts:
+    get:
+      summary: Retrieve Users
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/Account"
+        401:
+          description: No users registered
+          content:
+            application/json:
+              example: "Not Found"
+  /api/accounts/{id}:
+    parameters:
+      - name: id
+        in: path
+        schema:
+         type: string
+        required: true
+    get:
+      summary: Retrieve Users with the Id
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/Account"
+        401:
+          description: No User registered
+          content:
+            application/json:
+              example: "Not Found"
+  /api/admin/accounts/{id}:
+    parameters:
+      - name: id
+        in: path
+        schema:
+         type: string
+        required: true
+    post:
+      tags:
+        - admin
+      summary: Registration of new Users
+      description: "only administrative users will be able to access this endpoint to register new products"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Account"
+      responses:
+        201: 
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Account"
+        401:
+          description: Access Denied
+          content:
+            application/json:
+              example: "Unauthorized"
+    put:
+      tags:
+        - admin
+      summary: Update data from Accounts
+      description: "only administrative users will be able to access this endpoint to update the users"
+      requestBody:
+        description: "administrative users only"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Account"
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Account"
+        401:
+          description: Access Denied
+          content:
+            application/json:
+              example: "Unauthorized"
+    delete:
+      tags:
+        - admin
+      summary: Delete data from Accounts
+      description: "only administrative users will be able to access this endpoint to update the users"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Account"
+        401:
+          description: Access Denied
+          content:
+            application/json:
+              example: "Unauthorized"
+components:
+  schemas:
+    Account:
+      type: object
+      properties:
+        name:
+          type: string
+        password:
+          type: string
+        CPF:
+          type: string
+        phoneNumber: 
+          type: string
+        address:
+          type: object
+          properties:
+            street:
+              type: string
+            homeNumber:
+              type: string
+            complement:
+              type: string
+            zipCode:
+              type: number
+            city:
+              type: string
+            state:
+              type: string
