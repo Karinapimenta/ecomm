@@ -1,0 +1,343 @@
+openapi: 3.0.1
+info:
+  title: Ecomm Project
+  version: 0.0.1
+  contact:
+    name: Customer Support
+    email: nxtdev@example.com
+servers:
+- url: https://63d0272410982404378e4874.mockapi.io
+  description: Categories
+paths:
+  /api/categories:
+    get:
+      summary: Retrieve categories
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/Category"
+        401:
+          description: No category registered
+          content:
+            application/json:
+              example: "Not Found"
+        404:
+          description: Category not found
+          content:
+            application/json:
+              example: "Not Found"
+  /api/categories/{id}:
+    get:
+      summary: Detailing of a category by its Ids
+      parameters:
+      - name: id
+        in: path
+        schema:
+         type: string
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        404:
+          description: Category not found
+          content:
+            application/json:
+              example: "Not Found"
+  /api/admin/categories:
+    post:
+      tags:
+        - admin
+      summary: Registration of new Categories
+      description: "only administrative users will be able to access this endpoint to register new categories"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+             type: object
+             properties:
+              name:
+               type: string
+      responses:
+        201: 
+          description: Created
+          content:
+           application/json:
+            schema:
+             $ref: "#/components/schemas/Category"
+        401:
+          description: Access Denied
+          content:
+            application/json:
+              example: "Unauthorized"
+  /api/admin/categories/{id}:
+    parameters:
+      - name: id
+        in: path
+        schema:
+         type: string
+        required: true
+    put:
+      tags:
+        - admin
+      summary: Update data from categories
+      description: "only administrative users will be able to access this endpoint to update the categories"
+      requestBody:
+        description: "administrative users only"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Category"
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        401:
+          description: Access Denied
+          content:
+            application/json:
+              example: "Unauthorized"
+        404:
+          description: Category not found
+          content:
+            application/json:
+              example: "Not Found"
+    delete:
+      tags:
+        - admin
+      summary: Delete data from categories
+      description: "only administrative users will be able to access this endpoint to update the categories"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        401:
+          description: Access Denied
+          content:
+            application/json:
+              example: "Unauthorized"
+        404:
+          description: Category not found
+          content:
+            application/json:
+              example: "Not Found"
+    patch:
+      tags: 
+      - admin
+      summary: Activate data from categories
+      description: "only administrative users will be able to access this endpoint to update the categories"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Category"
+        401:
+          description: Access Denied
+          content:
+            application/json:
+              example: "Unauthorized"
+        404:
+          description: Category not found
+          content:
+            application/json:
+              example: "Not Found"
+  /api/products:
+    get:
+      summary: Retrieve all Products
+      parameters:
+        - name: maximumPrice
+          in: query
+          schema:
+            type: number
+        - name: miminumPrice
+          in: query
+          schema:
+            type: number
+        - name: category
+          in: query
+          schema:
+            type: string
+        - name: miminumQuantity
+          in: query
+          schema:
+            type: number
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/Product"
+        401:
+          description: No product registered
+          content:
+            application/json:
+              example: "Not Found"
+  /api/products/{id}:
+    parameters:
+      - name: id
+        in: path
+        schema:
+         type: string
+        required: true
+    get:
+      summary: Retrieve Products by the Id
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/Product"
+        401:
+          description: No product registered
+          content:
+            application/json:
+              example: "Not Found"
+  /api/admin/products:
+    post:
+      tags:
+        - admin
+      summary: Registration of new Products
+      description: "only administrative users will be able to access this endpoint to register new products"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        201: 
+          description: Created
+          content:
+           application/json:
+            schema:
+             $ref: "#/components/schemas/Product"
+        401:
+          description: Access Denied
+          content:
+            application/json:
+              example: "Unauthorized"
+  /api/admin/products/{id}:
+    parameters:
+      - name: id
+        in: path
+        schema:
+         type: string
+        required: true    
+    get:
+      summary: Retrieve Products with the Id
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/Product"
+        404:
+          description: No product registered
+          content:
+            application/json:
+              example: "Not Found"
+    put:
+      tags:
+        - admin
+      summary: Update data from products
+      description: "only administrative users will be able to access this endpoint to update the products"
+      requestBody:
+        description: "administrative users only"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+        required: true
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        401:
+          description: Access Denied
+          content:
+            application/json:
+              example: "Unauthorized"
+        404:
+          description: Product not found
+          content:
+            application/json:
+              example: "Not Found"
+    delete:
+      tags:
+        - admin
+      summary: Delete data from Products
+      description: "only administrative users will be able to access this endpoint to update the products"
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        401:
+          description: Access Denied
+          content:
+            application/json:
+              example: "Unauthorized"
+        404:
+          description: Product not found
+          content:
+            application/json:
+              example: "Not Found"
+components:
+  schemas:
+    Category:
+      type: object
+      properties:
+        name:
+          type: string
+        status:
+          type: boolean
+        id:
+          type: string
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        product:
+          type: string
+        description:
+          type: string
+        slug:
+          type: string
+        price:
+          type: number 
+        quantity:
+          type: number
