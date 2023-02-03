@@ -26,6 +26,11 @@ paths:
           content:
             application/json:
               example: "Not Found"
+        404:
+          description: Category not found
+          content:
+            application/json:
+              example: "Not Found"
   /api/categories/{id}:
     get:
       summary: Detailing of a category by its Ids
@@ -211,13 +216,7 @@ paths:
           content:
             application/json:
               example: "Not Found"
-  /api/admin/products/{id}:
-    parameters:
-      - name: id
-        in: path
-        schema:
-         type: string
-        required: true
+  /api/admin/products:
     post:
       tags:
         - admin
@@ -240,7 +239,14 @@ paths:
           description: Access Denied
           content:
             application/json:
-              example: "Unauthorized"    
+              example: "Unauthorized"
+  /api/admin/products/{id}:
+    parameters:
+      - name: id
+        in: path
+        schema:
+         type: string
+        required: true    
     get:
       summary: Retrieve Products with the Id
       responses:

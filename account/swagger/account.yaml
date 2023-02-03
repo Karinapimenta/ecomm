@@ -8,7 +8,7 @@ info:
 servers:
 - url: https://63d29ca806556a0fdd40bb13.mockapi.io/
 paths:
-  /api/accounts:
+  /api/admin/accounts:
     get:
       summary: Retrieve Users
       responses:
@@ -25,36 +25,6 @@ paths:
           content:
             application/json:
               example: "Not Found"
-  /api/accounts/{id}:
-    parameters:
-      - name: id
-        in: path
-        schema:
-         type: string
-        required: true
-    get:
-      summary: Retrieve Users with the Id
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: array
-                items: 
-                  $ref: "#/components/schemas/Account"
-        401:
-          description: No User registered
-          content:
-            application/json:
-              example: "Not Found"
-  /api/admin/accounts/{id}:
-    parameters:
-      - name: id
-        in: path
-        schema:
-         type: string
-        required: true
     post:
       tags:
         - admin
@@ -78,6 +48,29 @@ paths:
           content:
             application/json:
               example: "Unauthorized"
+  /api/admin/accounts/{id}:
+    parameters:
+      - name: id
+        in: path
+        schema:
+         type: string
+        required: true
+    get:
+      summary: Retrieve Users with the Id
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/Account"
+        401:
+          description: No User registered
+          content:
+            application/json:
+              example: "Not Found"
     put:
       tags:
         - admin
