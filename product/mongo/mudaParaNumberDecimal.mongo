@@ -9,6 +9,6 @@ db.products.aggregate([{
         "category":"$categoria",
     }
 },{
-    $out:"products2"
+    $out:"products"
 }
 ])

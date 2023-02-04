@@ -3,7 +3,7 @@ let productSlug = "tablet-galaxy-tab-s8";
 let amount = 2;
 let flag = false;
 use ('ecomm-product')
-let product1 = db.products2.findOneAndUpdate(
+let product1 = db.products.findOneAndUpdate(
     {
         slug:productSlug,
         quantityInStock:{

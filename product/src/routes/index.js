@@ -1,5 +1,5 @@
 import express from "express";
-import products from "./productsRoutes.js"
+import products from "./productsRoutes.js";
 import categories from "./categoriesRoutes.js";
 
 const routes =(app)=>{
@@ -8,7 +8,7 @@ const routes =(app)=>{
     })
     app.use (
         express.json(),
-        categories, 
+        categories,
         products
     )
 }

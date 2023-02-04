@@ -2,17 +2,17 @@ import mongoose from "mongoose";
 const productSchema = new mongoose.Schema (
     {
         id: {type: String},
-        product: {
+        product:{
             type: String, 
             required: true,
             minlength: 3,
-            match: /^\D+\w{2,}$/
+            match: /^\D+(\w*\s*\d*)*$/
         },
         description: {type: String, rquired: true},
         slug:{
             type: String,
             required: true,
-            match: /^[A-Za-z0-9]*$/
+            match: /^(\w+\-?)*$/
         },
         pricePerUnit:{
             type: mongoose.Types.Decimal128,
@@ -20,15 +20,14 @@ const productSchema = new mongoose.Schema (
             min: 0.01
         },
         quantityInStock:{
-            type: mongoose.Types.Number,
+            type: mongoose.Types.Decimal128,
             required: true,
             min: 1,
-            max: 10000,
-            required: true
+            max: 10000
         },
         category:{
-            type: String,
-            required: true,
+            type: mongoose.Types.ObjectId,
+            required: false,
         }
     },
     {
