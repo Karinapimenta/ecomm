@@ -1,7 +1,9 @@
 import express from 'express';
 import UserController from '../controllers/usersController.js';
 
+
 const router = express.Router();
+
 router
     .get('/api/users', UserController.getUsers)
     .get('/api/users/:id', UserController.getUserbyId)

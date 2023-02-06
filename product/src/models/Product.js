@@ -25,10 +25,8 @@ const productSchema = new mongoose.Schema (
             min: 1,
             max: 10000
         },
-        category:{
-            type: mongoose.Types.ObjectId,
-            required: false,
-        }
+        category:{ 
+            id: {type: mongoose.Schema.Types.ObjectId, ref: 'categories', required: true} },
     },
     {
         versionKey: false

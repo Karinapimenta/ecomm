@@ -9,9 +9,17 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: secret
     ports:
       - 27017:27017
+  mongo-seed:
+    image: mongo
+    container_name: mongo-seed
+    links:
+      - mongo-ecomm
+    volumes:
+      - "./mongo-seed:/mongo-seed"
+    command: /bin/bash "/mongo-seed/import.sh"
   ecomm-product:
     image: karinabpimenta/ecomm-product:1.0
     container_name: ecomm-product
   account:
     build: c:/alura/projeto/ecomm/account
-    container_name: ecomm-account  
+    container_name: ecomm-account
