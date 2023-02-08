@@ -2,7 +2,7 @@ let customerCPF = "71986318001";
 let productSlug = "livro-refactoring";
 let flag = false;
 use ('ecomm-product')
-let product1 = db.products2.findOneAndUpdate(
+let product1 = db.products.findOneAndUpdate(
     {
         slug:productSlug,
         quantityInStock:{
@@ -24,7 +24,7 @@ product1.discountPercentage = 10;
 product1.finalPrice = NumberDecimal((product1.quantity * (product1.pricePerUnit- ((product1.pricePerUnit / 100) * product1.discountPercentage))).toFixed(2));
 console.log(product1)
 
-let product2 = db.products2.findOneAndUpdate(
+let product2 = db.products.findOneAndUpdate(
     {
         slug:"livro-clean",
         quantityInStock:{

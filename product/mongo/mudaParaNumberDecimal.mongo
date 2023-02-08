@@ -1,14 +1,14 @@
 db.products.aggregate([{
     $project:{
         "_id":"$_id",
-        "product":"$produto",
-        "description":"$descricao",
+        "product":"$product",
+        "description":"$description",
         "slug":"$slug",
-        "pricePerUnit":{$round:[{$toDecimal:"$precoUnitario"},2]},
-        "quantityInStock":"$quantidadeEmEstoque",
-        "category":"$categoria",
+        "pricePerUnit":{$round:[{$toDecimal:"$pricePerUnit"},2]},
+        "quantityInStock":"$quantityInStock",
+        "category":"$category",
     }
 },{
-    $out:"products2"
+    $out:"products"
 }
 ])

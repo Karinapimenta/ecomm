@@ -21,11 +21,6 @@ paths:
                 type: array
                 items: 
                   $ref: "#/components/schemas/Category"
-        401:
-          description: No category registered
-          content:
-            application/json:
-              example: "Not Found"
         404:
           description: Category not found
           content:
