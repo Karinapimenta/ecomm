@@ -23,3 +23,15 @@ services:
   account:
     build: ./account
     container_name: ecomm-account
+  order:
+    build: ./order
+    container_name: ecomm-order
+  mysql:
+    image: mysql
+    container_name: mysql-ecomm
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+  
