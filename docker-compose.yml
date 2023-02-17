@@ -13,19 +13,33 @@ services:
     image: mongo
     container_name: mongo-seed
     links:
-      - mongo-ecomm
+      - mongo
     volumes:
       - "./mongo-seed:/mongo-seed"
     command: /bin/bash "/mongo-seed/import.sh"
+    depends_on:
+      - mongo
   product:
     build: ./product
     container_name: ecomm-product
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongo
   account:
     build: ./account
     container_name: ecomm-account
+    ports:
+      - 3001:3001
+    depends_on:
+      - mongo
   order:
     build: ./order
     container_name: ecomm-order
+    ports:
+      - 3002:3002
+    depends_on:
+      - mysql
   mysql:
     image: mysql
     container_name: mysql-ecomm
@@ -34,4 +48,10 @@ services:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: secret
-  
+  finance:
+    build: ./finance
+    container_name: ecomm-finance
+    ports:
+      - 3003:3003
+    depends_on:
+      - mysql

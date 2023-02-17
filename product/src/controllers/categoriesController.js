@@ -10,7 +10,7 @@ class CategoryController{
             }
         })
     }
-    static getCategorybyId =(req, res) =>{
+    static getCategoryById =(req, res) =>{
         const id = req.params.id;
         categories.findById(id, (err, categories)=>{
             if (err){
@@ -20,7 +20,7 @@ class CategoryController{
             }
         })
     }
-    static registerCategory = (req, res) => {
+    static saveCategory = (req, res) => {
         let category = new categories(req.body);
         category.save((err)=>{
             if(err){

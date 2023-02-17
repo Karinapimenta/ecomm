@@ -1,12 +1,11 @@
 {
-  "name": "ecomm",
+  "name": "account",
   "version": "1.0.0",
   "description": "Projeto de Ecommerce criando durante o programa LevelUp da Alura",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node src/main.js",
+    "dev": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

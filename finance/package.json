@@ -2,10 +2,9 @@
   "name": "finance",
   "version": "1.0.0",
   "description": "Projeto de Ecommerce criando durante o programa LevelUp da Alura",
-  "main": "index.js",
-  "type": "module",
+  "main": "./api/index.js",
   "scripts": {
-    "dev": "nodemon server.js",
+    "start": "nodemon ./api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,11 +19,11 @@
   },
   "homepage": "https://github.com/Karinapimenta/ecomm#readme",
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.20"
   },
   "dependencies": {
-    "express": "^4.17.3",
     "body-parser": "^1.20.1",
+    "express": "^4.17.3",
     "mysql2": "^3.1.1",
     "path": "^0.12.7",
     "sequelize": "^6.28.0",

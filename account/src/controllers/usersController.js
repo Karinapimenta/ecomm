@@ -20,12 +20,12 @@ class UserController{
             }
         })
     }
-    static registerUser = (req, res) => {
+    static saveUser = (req, res) => {
         let user = new users(req.body);
         user.save((err)=>{
             if(err){
-                res.status(401).send({
-                    message:`${err.message} - Access Denied`})
+                res.status(40).send({
+                    message:`${err.message} - Bad Request`})
             } else {
                 res.status(201).send(user.toJSON())
             }
@@ -44,7 +44,7 @@ class UserController{
         const id = req.params.id;
         users.findByIdAndDelete(id, (err)=> {
             if(!err){
-                res.status(200).send({message:'User removed successfully'})
+                res.status(204)
             }else{
                 res.status(404).send({message: err.message})
             }

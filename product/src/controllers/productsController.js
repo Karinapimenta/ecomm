@@ -20,7 +20,7 @@ class ProductController{
             }
         })
     }
-    static registerProduct = (req, res) => {
+    static saveProduct = (req, res) => {
         let product = new products(req.body);
         product.save((err)=>{
             if(err){
