@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   mongo:
-    image: mongo
+    image: mongo:5
     restart: always
     container_name: mongo-ecomm
     environment:
@@ -10,7 +10,7 @@ services:
     ports:
       - 27017:27017
   mongo-seed:
-    image: mongo
+    image: mongo:5
     container_name: mongo-seed
     links:
       - mongo
@@ -33,13 +33,6 @@ services:
       - 3001:3001
     depends_on:
       - mongo
-  order:
-    build: ./order
-    container_name: ecomm-order
-    ports:
-      - 3002:3002
-    depends_on:
-      - mysql
   mysql:
     image: mysql
     container_name: mysql-ecomm
