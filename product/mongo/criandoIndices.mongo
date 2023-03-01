@@ -1,3 +1,3 @@
-db.products.createIndex({"category.name":1});
-db.products.createIndex({"slug":1},{unique:true});
+db.products.createIndex({ "category.name": 1 });
+db.products.createIndex({ slug: 1 }, { unique: true });
 db.products.getIndexes();

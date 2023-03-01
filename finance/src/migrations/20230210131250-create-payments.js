@@ -1,4 +1,3 @@
-'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -7,43 +6,43 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       value: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL,
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       number: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       expirationDate: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       cvv: {
-        type: Sequelize.DOUBLE
+        type: Sequelize.DOUBLE,
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
-      invoiceId:{
-        type: Sequelize.INTEGER
+      invoiceId: {
+        type: Sequelize.INTEGER,
       },
-      links:{
-        type: Sequelize.JSON
+      links: {
+        type: Sequelize.JSON,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface) {
     await queryInterface.dropTable('Payments');
-  }
+  },
 };

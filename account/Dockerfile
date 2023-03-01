@@ -1,3 +1,3 @@
-FROM node:16-alpine
+FROM node
 COPY . .
 ENTRYPOINT npm run dev

@@ -1,3 +1,4 @@
-db.products.updateMany({"category.name":"LIVROS"},{$set:{"quantityInStock":0}})
-
-   
+db.products.updateMany(
+  { "category.name": "LIVROS" },
+  { $set: { quantityInStock: 8 } }
+);

@@ -1,9 +1,6 @@
 db.products.find(
-    {$and:
-        [
-        {"pricePerUnit":{$gte:1000}},
-        {"pricePerUnit":{$lte:2000}}
-        ]
-    },
-    {"product":1, "pricePerUnit":1, _id:1}
-)
+  {
+    $and: [{ pricePerUnit: { $gte: 1000 } }, { pricePerUnit: { $lte: 2000 } }],
+  },
+  { product: 1, pricePerUnit: 1, _id: 1 }
+);

@@ -1,36 +1,45 @@
-db.orders.aggregate([{
-$match: {
-    "customer._id": ObjectId("63e12190c371722310452ab8")
-}
-},{
-    $unwind:"$orderedItems"
-},{
-    $group:{
-        "_id": "orderedItems",
-        price:{
-            $sum:"$orderedItems.pricePerUnit"
+db.orders
+  .aggregate([
+    {
+      $match: {
+        "customer._id": ObjectId("63f62bf5497c6920383fdadd"),
+      },
+    },
+    {
+      $unwind: "$orderedItems",
+    },
+    {
+      $group: {
+        _id: "orderedItems",
+        price: {
+          $sum: "$orderedItems.pricePerUnit",
         },
-        quantity:{
-            $sum:"$orderedItems.quantity"
+        quantity: {
+          $sum: "$orderedItems.quantity",
         },
-        finalPrice:{
-            $sum:"$orderedItems.finalPrice"
-        }
-    }
-},{
-    "$project": {
-        _id:0,
+        finalPrice: {
+          $sum: "$orderedItems.finalPrice",
+        },
+      },
+    },
+    {
+      $project: {
+        _id: 0,
 
-        totalPrice:"$price",
-        totalQuantity:"$quantity",
-        totalDiscount:{
-            $round:[{
-                $subtract:["$price","$finalPrice"]
-            },2]
+        totalPrice: "$price",
+        totalQuantity: "$quantity",
+        totalDiscount: {
+          $round: [
+            {
+              $subtract: ["$price", "$finalPrice"],
+            },
+            2
+          ],
         },
-        finalPrice:"$finalPrice"
+        finalPrice: "$finalPrice",
+      },
+    },
+    {
+      $out: "statistics",
     }
-},{
-    $out: "statistics"
-}
-]).pretty();
+  ]).pretty();
