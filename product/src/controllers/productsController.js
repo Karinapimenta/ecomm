@@ -1,8 +1,8 @@
-import products from '../models/Product.js';
+import Products from '../models/Product.js';
 
 class ProductController {
   static getProducts = (req, res) => {
-    products.find((err, products) => {
+    Products.find((err, products) => {
       if (err) {
         res.status(404).send({ message: `${err.message} - No products found` });
       } else {
@@ -13,7 +13,7 @@ class ProductController {
 
   static getProductbyId = (req, res) => {
     const { id } = req.params;
-    products.findById(id, (err, products) => {
+    Products.findById(id, (err, products) => {
       if (err) {
         res.status(404).send({ message: `${err.message} - Product not found` });
       } else {
@@ -23,7 +23,7 @@ class ProductController {
   };
 
   static saveProduct = (req, res) => {
-    const product = new products(req.body);
+    const product = new Products(req.body);
     product.save((err) => {
       if (err) {
         res.status(401).send({ message: `${err.message} - Access Denied` });
@@ -35,18 +35,20 @@ class ProductController {
 
   static updateProduct = (req, res) => {
     const { id } = req.params;
-    products.findByIdAndUpdate(id, { $set: req.body }, (err) => {
-      if (!err) {
+    let flag = 0;
+    if (Object.keys(req.body).length === 0) { flag = 1; }
+    Products.findByIdAndUpdate(id, { $set: req.body }, (err) => {
+      if (!err && flag === 0) {
         res.status(200).send({ message: 'Product updated successfully' });
       } else {
-        res.status(404).send({ message: err.message });
+        res.status(404).send({ message: 'Product could NOT be updated due to invalid values' });
       }
     });
   };
 
   static deleteProduct = (req, res) => {
     const { id } = req.params;
-    products.findByIdAndDelete(id, (err) => {
+    Products.findByIdAndDelete(id, (err) => {
       if (!err) {
         res.status(200).send({ message: 'Product removed successfully' });
       } else {

@@ -37,10 +37,8 @@ class OrdersController {
     try {
       await db.Orders.update({ status }, { where: { id: Number(id) } });
       const statusUpdatedOrder = await db.Orders.findOne({ where: { id: Number(id) } });
-      console.log(statusUpdatedOrder.customerId)
-      const customerInfos = await fetch(`http://${host}:3001/api/users/${statusUpdatedOrder.customerId}`)
+      const customerInfos = await fetch(`http://${host}:${port}/api/users/${statusUpdatedOrder.customerId}`)
         .then((response) => response.json());
-      console.log(customerInfos)
       await db.Orders.update(
         {
           customerName: customerInfos.name,

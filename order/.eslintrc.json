@@ -14,7 +14,7 @@
     "rules":{
         "linebreak-style": [
             "error",
-            "unix"
+            "windows"
         ],
         "import/extensions": 0,
         "array-callback-return": 0,

@@ -4,5 +4,6 @@ const STATUS = {
   CONFIRMADO: 'CONFIRMADO',
 
 };
-
-module.exports = { STATUS };
+const port = '3003';
+const host = 'localhost';
+module.exports = { STATUS, port, host };
