@@ -1,5 +1,6 @@
 db.products.find(
-    {
-        "quantityInStock": {$gte:3}},
-    {"quantityInStock": 1, "product":1, _id:1}
-)
+  {
+    quantityInStock: { $gte: 3 },
+  },
+  { quantityInStock: 1, product: 1, _id: 1 }
+);

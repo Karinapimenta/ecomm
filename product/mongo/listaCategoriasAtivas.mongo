@@ -1,6 +1,6 @@
 db.categories.find(
     {
-        status: true
+        status: "true"
     },
     {
         name:1, _id:0

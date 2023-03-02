@@ -1,4 +1,4 @@
 db.products.find(
- {$or:[{"category.name":"LIVROS"},{"category.name":"CELULARES"}]},
-    {"product":1, _id:1, "category":1}
-)
+  { $or: [{ "category.name": "LIVROS" }, { "category.name": "CELULARES" }] },
+  { product: 1, _id: 1, category: 1 }
+);

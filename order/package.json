@@ -1,0 +1,37 @@
+{
+  "name": "order",
+  "version": "1.0.0",
+  "description": "Projeto de Ecommerce criando durante o programa LevelUp da Alura",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Karinapimenta/ecomm.git"
+  },
+  "keywords": [],
+  "author": "Karina Pimenta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Karinapimenta/ecomm/issues"
+  },
+  "homepage": "https://github.com/Karinapimenta/ecomm#readme",
+  "devDependencies": {
+    "eslint": "^8.35.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
+    "jest": "28.1.0",
+    "mysql2": "^3.1.2",
+    "nodemon": "^2.0.20",
+    "path": "^0.12.7",
+    "sequelize": "^6.28.0",
+    "sequelize-cli": "^6.6.0"
+  }
+}
