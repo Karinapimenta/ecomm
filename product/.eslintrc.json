@@ -11,13 +11,12 @@
         "sourceType": "module"
     },
     "rules": {
+        "import/extensions": 0,
         "linebreak-style": [
             "error",
             "windows"
         ],
-        "import/extensions": 0,
         "array-callback-return": 0,
-        "new-cap":0,
         "no-shadow":0,
         "no-console":0
     }

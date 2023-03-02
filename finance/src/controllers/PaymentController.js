@@ -1,6 +1,6 @@
 const database = require('../models');
 const DataCheck = require('../datacheck/dataCheck.js');
-const STATUS = require('../constantes/constantes.js');
+const { STATUS, host, port } = require('../utils/constantes.js');
 
 class PaymentController {
   static async getOnePayment(req, res) {
@@ -17,7 +17,7 @@ class PaymentController {
       if (onePayment != null) {
         return res
           .status(200)
-          .location(`http://localhost:3003/payments/${onePayment.id}`)
+          .location(`http://${host}:${port}/payments/${onePayment.id}`)
           .json(onePayment);
       } return res.status(404).send({ message: 'Payment not found' });
     } catch (error) {

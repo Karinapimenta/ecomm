@@ -1,3 +1,3 @@
 FROM node
 COPY . .
-ENTRYPOINT npm run dev
+ENTRYPOINT npm start

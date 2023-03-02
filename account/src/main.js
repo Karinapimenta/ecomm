@@ -1,1 +1,1 @@
-console.log("Iniciando account");
+console.log('Iniciando account');
