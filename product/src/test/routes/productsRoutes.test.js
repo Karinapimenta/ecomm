@@ -1,16 +1,12 @@
 /* eslint-disable no-undef */
 import { describe, it } from '@jest/globals';
 import request from 'supertest';
+import mongoose from 'mongoose';
 import app from '../../app.js';
 
-let server;
-beforeEach(() => {
-  const port = 3030;
-  server = app.listen(port);
-});
-
-afterEach(() => {
-  server.close();
+afterAll((done) => {
+  mongoose.connection.close();
+  done();
 });
 
 describe('GET from /api/products', () => {
@@ -20,11 +16,6 @@ describe('GET from /api/products', () => {
       .set('Accept', 'application/json')
       .expect('content-type', /json/)
       .expect(200);
-  });
-  it.skip('Must NOT return a list of products', async () => {
-    await request(app)
-      .get('/api/products')
-      .expect(404);
   });
 });
 

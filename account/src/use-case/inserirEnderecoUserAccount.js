@@ -1,4 +1,5 @@
-import { users } from "./createUserAccount.js";
+import { users } from './createUserAccount.js';
+
 export function addAddressUseCase(
   newLogradouro,
   newNumero,
@@ -6,7 +7,7 @@ export function addAddressUseCase(
   newBairro,
   newCep,
   newCidade,
-  NewUf
+  NewUf,
 ) {
   const endereco = {
     logradouro: newLogradouro,
@@ -21,7 +22,7 @@ export function addAddressUseCase(
 }
 
 export function checkUserAddressUseCase(endereco, nome) {
-  users.forEach(function (elemento) {
+  users.forEach((elemento) => {
     if (elemento.name.includes(nome)) {
       elemento.endereco = endereco;
     }

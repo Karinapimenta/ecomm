@@ -14,12 +14,11 @@
     "rules":{
         "linebreak-style": [
             "error",
-            "unix"
+            "windows"
         ],
         "import/extensions": 0,
         "array-callback-return": 0,
-        "new-cap":0,
-        "no-shadow":0,
-        "no-console":0
+        "import/no-dynamic-require":0,
+        "global-require":0
     }
 }
