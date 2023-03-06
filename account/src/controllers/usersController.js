@@ -1,8 +1,5 @@
 import Users from '../models/User.js';
-<<<<<<< HEAD
 import DataCheck from '../dataCheck/dataCheckUser.js';
-=======
->>>>>>> ee80271fc9babd2375e4105821fde148b2068e5d
 
 class UserController {
   static getUsers = (req, res) => {
@@ -19,11 +16,7 @@ class UserController {
     const { id } = req.params;
     Users.findById(id, (err, users) => {
       if (err) {
-<<<<<<< HEAD
         res.status(404).send({ message: `${err.message} - User not found` });
-=======
-        res.status(404).send({ message: `${err.message} - User not foundi` });
->>>>>>> ee80271fc9babd2375e4105821fde148b2068e5d
       } else {
         res.status(200).send(users);
       }
@@ -34,11 +27,7 @@ class UserController {
     const user = new Users(req.body);
     user.save((err) => {
       if (err) {
-<<<<<<< HEAD
         res.status(400).send({ message: `${err.message} - Bad Request` });
-=======
-        res.status(40).send({ message: `${err.message} - Bad Request` });
->>>>>>> ee80271fc9babd2375e4105821fde148b2068e5d
       } else {
         res.status(201).send(user.toJSON());
       }
@@ -47,7 +36,7 @@ class UserController {
 
   static updateUser = (req, res) => {
     const { id } = req.params;
-<<<<<<< HEAD
+
     const info = new Users(req.body);
     const flag = [];
 
@@ -62,13 +51,6 @@ class UserController {
         res.status(200).send({ message: 'User updated successfully' });
       } else {
         res.status(404).send({ message: 'User could NOT be updated due to invalid values' });
-=======
-    Users.findByIdAndUpdate(id, { $set: req.body }, (err) => {
-      if (!err) {
-        res.status(200).send({ message: 'User updated successfully' });
-      } else {
-        res.status(404).send({ message: err.message });
->>>>>>> ee80271fc9babd2375e4105821fde148b2068e5d
       }
     });
   };

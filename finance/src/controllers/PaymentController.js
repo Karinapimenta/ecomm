@@ -1,9 +1,6 @@
 const database = require('../models');
 const DataCheck = require('../datacheck/dataCheck.js');
-<<<<<<< HEAD
-=======
-const { STATUS, host, port } = require('../utils/constantes.js');
->>>>>>> ee80271fc9babd2375e4105821fde148b2068e5d
+const { host, port } = require('../utils/constantes.js');
 
 class PaymentController {
   static async getOnePayment(req, res) {

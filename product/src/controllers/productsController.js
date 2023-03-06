@@ -1,8 +1,5 @@
 import Products from '../models/Product.js';
-<<<<<<< HEAD
 import DataCheck from '../datacheck/dataCheckProducts.js';
-=======
->>>>>>> ee80271fc9babd2375e4105821fde148b2068e5d
 
 class ProductController {
   static getProducts = (req, res) => {
@@ -39,7 +36,6 @@ class ProductController {
 
   static updateProduct = (req, res) => {
     const { id } = req.params;
-<<<<<<< HEAD
     const info = new Products(req.body);
     const flag = [];
 
@@ -51,12 +47,6 @@ class ProductController {
     if (Object.keys(req.body).length === 0) { size = 1; }
     Products.findByIdAndUpdate(id, { $set: req.body }, (err) => {
       if (!err && size === 0 && flag.length === 0) {
-=======
-    let flag = 0;
-    if (Object.keys(req.body).length === 0) { flag = 1; }
-    Products.findByIdAndUpdate(id, { $set: req.body }, (err) => {
-      if (!err && flag === 0) {
->>>>>>> ee80271fc9babd2375e4105821fde148b2068e5d
         res.status(200).send({ message: 'Product updated successfully' });
       } else {
         res.status(404).send({ message: 'Product could NOT be updated due to invalid values' });

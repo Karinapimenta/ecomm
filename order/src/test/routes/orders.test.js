@@ -30,11 +30,11 @@ describe('POST on /orders', () => {
       .expect(201);
     idResult = result.body.id;
   });
-  it.skip('Must NOT save a new order', async () => {
+  it('Must NOT save a new order', async () => {
     await request(app)
       .post('/orders')
       .send({ })
-      .expect(500);
+      .expect(400);
   });
 });
 describe('PATCH on /orders/:id/CONFIRMADO', () => {

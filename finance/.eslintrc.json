@@ -17,15 +17,11 @@
             "windows"
         ],
         "import/extensions": 0,
-<<<<<<< HEAD
         "new-cap":0,
         "no-shadow":0,
         "consistent-return":0,
         "import/no-dynamic-require":0,
-        "global-require":0
-=======
-        "no-console":0,
-        "consistent-return":0
->>>>>>> ee80271fc9babd2375e4105821fde148b2068e5d
+        "global-require":0,
+        "no-console":0
     }
 }

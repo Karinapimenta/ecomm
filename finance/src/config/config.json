@@ -9,17 +9,13 @@
   "test": {
     "username": "root",
     "password": "secret",
-<<<<<<< HEAD
     "database": "mysql",
-=======
-    "database": "database_test",
->>>>>>> ee80271fc9babd2375e4105821fde148b2068e5d
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": "secret",
+    "password": null,
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql"

@@ -33,11 +33,7 @@ const userSchema = new mongoose.Schema(
         number: { type: String, required: true },
         complement: { type: String },
         neighborhood: { type: String },
-<<<<<<< HEAD
-        zipCode: { type: Number, required: true, match: /^(\d){2}$/ },
-=======
         zipCode: { type: Number, required: true, match: /^(\d){8}$/ },
->>>>>>> ee80271fc9babd2375e4105821fde148b2068e5d
         city: { type: String, required: true },
         state: { type: String, required: true, match: /^(\s*(AC|AL|AP|AM|BA|CE|DF|ES|GO|MA|MT|MS|MG|PA|PB|PR|PE|PI|RJ|RN|RS|RO|RR|SC|SP|SE|TO)?)$/gmi },
       },
