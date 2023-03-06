@@ -17,6 +17,7 @@
             "windows"
         ],
         "import/extensions":0,
+<<<<<<< HEAD
         "consistent-return":0,
         "array-callback-return":0,
         "import/prefer-default-export": 0,
@@ -25,3 +26,11 @@
     }
         
 }
+=======
+        "no-console":0,
+        "array-callback-return":0,
+        "import/prefer-default-export": 0
+    }
+        
+}
+>>>>>>> ee80271fc9babd2375e4105821fde148b2068e5d

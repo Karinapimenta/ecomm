@@ -1,5 +1,8 @@
 import Categories from '../models/Category.js';
+<<<<<<< HEAD
 import DataCheck from '../datacheck/dataCheckCategories.js';
+=======
+>>>>>>> ee80271fc9babd2375e4105821fde148b2068e5d
 
 class CategoryController {
   static getCategories = (req, res) => {
@@ -36,6 +39,7 @@ class CategoryController {
 
   static updateCategory = (req, res) => {
     const { id } = req.params;
+<<<<<<< HEAD
     const info = new Categories(req.body);
     const flag = [];
 
@@ -46,6 +50,13 @@ class CategoryController {
     if (Object.keys(req.body).length === 0) { size = 1; }
     Categories.findByIdAndUpdate(id, { $set: req.body }, (err) => {
       if (!err && size === 0 && flag.length === 0) {
+=======
+    let flag = 0;
+    if (Object.keys(req.body).length === 0) { flag = 1; }
+    console.log('Aqui');
+    Categories.findByIdAndUpdate(id, { $set: req.body }, (err) => {
+      if (!err && flag === 0) {
+>>>>>>> ee80271fc9babd2375e4105821fde148b2068e5d
         res.status(200).send({ message: 'Category updated successfully' });
       } else {
         res.status(404).send({ message: 'Category could NOT be updated due to invalid values' });

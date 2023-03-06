@@ -32,7 +32,10 @@
   },
   "dependencies": {
     "@jest/globals": "^29.4.3",
+<<<<<<< HEAD
     "dotenv": "^16.0.3",
+=======
+>>>>>>> ee80271fc9babd2375e4105821fde148b2068e5d
     "express": "^4.17.3",
     "mongoose": "^6.2.6",
     "swagger-ui-express": "^4.6.0",

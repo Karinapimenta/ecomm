@@ -4,6 +4,7 @@ const {
 
 module.exports = (sequelize, DataTypes) => {
   class Orders extends Model {
+<<<<<<< HEAD
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,6 +13,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate() {
       // define association here
     }
+=======
+>>>>>>> ee80271fc9babd2375e4105821fde148b2068e5d
   }
   Orders.init({
     customerId: DataTypes.STRING,
