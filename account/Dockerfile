@@ -1,3 +1,5 @@
 FROM node
 COPY . .
-ENTRYPOINT npm start
+WORKDIR /app-node
+ENTRYPOINT npm run dev
+
