@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const userSchema = new mongoose.Schema(
   {
@@ -15,7 +16,7 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-      match: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,10}$/,
+      match: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,20}$/,
     },
     cpf: {
       type: String,
@@ -44,6 +45,28 @@ const userSchema = new mongoose.Schema(
     versionKey: false,
   },
 );
+
+userSchema.pre('save', function (next) {
+  const user = this;
+
+  if (this.isNew) {
+    bcrypt.genSalt(12, (saltError, salt) => {
+      if (saltError) {
+        return next(saltError);
+      }
+      bcrypt.hash(user.password, salt, (hashError, hash) => {
+        if (hashError) {
+          return next(hashError);
+        }
+
+        user.password = hash;
+        next();
+      });
+    });
+  } else {
+    return next();
+  }
+});
 
 const Users = mongoose.model('users', userSchema);
 export default Users;

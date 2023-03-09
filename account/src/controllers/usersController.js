@@ -1,6 +1,15 @@
+import bcrypt from 'bcryptjs';
+import jws from 'jsonwebtoken';
 import Users from '../models/User.js';
 import DataCheck from '../dataCheck/dataCheckUser.js';
 
+async function genToken(user) {
+  const payload = {
+    id: user._id,
+  };
+  const newToken = jws.sign(payload, process.env.APP_SECRET);
+  return newToken;
+}
 class UserController {
   static getUsers = (req, res) => {
     Users.find((err, users) => {
@@ -23,7 +32,7 @@ class UserController {
     });
   };
 
-  static saveUser = (req, res) => {
+  static createUser = (req, res) => {
     const user = new Users(req.body);
     user.save((err) => {
       if (err) {
@@ -34,23 +43,31 @@ class UserController {
     });
   };
 
-  static updateUser = (req, res) => {
+  static userLogin = async (req, res) => {
+    const token = await genToken(req.user);
+    return res.set('Authorization', token).status(204).send();
+  };
+
+  static updateUser = async (req, res) => {
     const { id } = req.params;
 
-    const info = new Users(req.body);
+    const info = req.body;
     const flag = [];
 
     DataCheck.emailCheck(info.email, flag);
     DataCheck.cpfCheck(info.cpf, flag);
     DataCheck.passwordCheck(info.password, flag);
     DataCheck.phoneCheck(info.phone, flag);
+    const salt = await bcrypt.genSalt(12);
+    const senhaHash = await bcrypt.hash(info.password, salt);
+    info.password = senhaHash;
     let size = 0;
     if (Object.keys(req.body).length === 0) { size = 1; }
-    Users.findByIdAndUpdate(id, { $set: req.body }, (err) => {
+    Users.findByIdAndUpdate(id, { $set: info }, (err) => {
       if (!err && size === 0 && flag.length === 0) {
         res.status(200).send({ message: 'User updated successfully' });
       } else {
-        res.status(404).send({ message: 'User could NOT be updated due to invalid values' });
+        res.status(404).send({ flag });
       }
     });
   };
