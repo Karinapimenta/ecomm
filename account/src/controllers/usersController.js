@@ -7,7 +7,7 @@ async function genToken(user) {
   const payload = {
     id: user._id,
   };
-  const newToken = jws.sign(payload, process.env.APP_SECRET);
+  const newToken = jws.sign(payload, process.env.APP_SECRET, { expiresIn: '30m' });
   return newToken;
 }
 class UserController {
