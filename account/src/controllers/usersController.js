@@ -36,7 +36,7 @@ class UserController {
     const user = new Users(req.body);
     user.save((err) => {
       if (err) {
-        res.status(400).send({ message: `${err.message} - Bad Request` });
+        res.status(500).send({ message: `${err.message} - Bad Request` });
       } else {
         res.status(201).send(user.toJSON());
       }
@@ -52,22 +52,22 @@ class UserController {
     const { id } = req.params;
 
     const info = req.body;
-    const flag = [];
+    const erros = [];
 
-    DataCheck.emailCheck(info.email, flag);
-    DataCheck.cpfCheck(info.cpf, flag);
-    DataCheck.passwordCheck(info.password, flag);
-    DataCheck.phoneCheck(info.phone, flag);
+    DataCheck.emailCheck(info.email, erros);
+    DataCheck.cpfCheck(info.cpf, erros);
+    DataCheck.passwordCheck(info.password, erros);
+    DataCheck.phoneCheck(info.phone, erros);
     const salt = await bcrypt.genSalt(12);
     const senhaHash = await bcrypt.hash(info.password, salt);
     info.password = senhaHash;
     let size = 0;
     if (Object.keys(req.body).length === 0) { size = 1; }
     Users.findByIdAndUpdate(id, { $set: info }, (err) => {
-      if (!err && size === 0 && flag.length === 0) {
+      if (!err && size === 0 && erros.length === 0) {
         res.status(200).send({ message: 'User updated successfully' });
       } else {
-        res.status(404).send({ flag });
+        res.status(400).send({ erros });
       }
     });
   };

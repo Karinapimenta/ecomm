@@ -3,6 +3,7 @@ class DataCheck {
     if (value <= 0) {
       return flag.push(' O VALOR DEVE SER MAIOR QUE ZERO');
     }
+    return null;
   }
 
   static cardCheck(cardNumber, flag) {
@@ -10,6 +11,7 @@ class DataCheck {
     if (rgxCard.test(cardNumber) === false) {
       return flag.push('CARTÃO INVÁLIDO');
     }
+    return null;
   }
 
   static dateCheck(date, flag) {
@@ -17,6 +19,7 @@ class DataCheck {
     if (rgxDate.test(date) === false) {
       return flag.push('DATA INVÁLIDA');
     }
+    return null;
   }
 
   static cvvCheck(cvv, flag) {
@@ -24,6 +27,7 @@ class DataCheck {
     if (rgxCvv.test(cvv) === false) {
       return flag.push('CVV INVÁLIDA');
     }
+    return null;
   }
 }
 module.exports = DataCheck;

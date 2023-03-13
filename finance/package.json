@@ -5,6 +5,7 @@
   "main": "./scr/index.js",
   "scripts": {
     "start": "node ./src/server.js",
+    "lint": "eslint src",
     "test": "jest --verbose",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",

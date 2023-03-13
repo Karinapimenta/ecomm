@@ -51,7 +51,7 @@ describe('POST on /api/admin/users', () => {
     await request(app)
       .post('/api/admin/users')
       .send({ })
-      .expect(400);
+      .expect(500);
   });
 });
 describe('GET on /api/user/:id', () => {
@@ -95,7 +95,7 @@ describe('PUT on /api/admin/user/:id', () => {
     await request(app)
       .put(`/api/admin/users/${idResult}`)
       .send({ })
-      .expect(404);
+      .expect(400);
   });
 });
 describe('DELETE on /api/admin/user/:id', () => {

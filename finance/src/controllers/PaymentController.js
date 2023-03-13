@@ -1,6 +1,6 @@
 const database = require('../models');
 const DataCheck = require('../datacheck/dataCheck.js');
-const { host, port } = require('../utils/constantes.js');
+const { host, port, STATUS } = require('../utils/constantes.js');
 
 class PaymentController {
   static async getOnePayment(req, res) {
@@ -33,7 +33,7 @@ class PaymentController {
     DataCheck.cardCheck(newPayment.number, flag);
     DataCheck.dateCheck(newPayment.expirationDate, flag);
     DataCheck.cvvCheck(newPayment.cvv, flag);
-    newPayment.status = 'CRIADO';
+    newPayment.status = STATUS.CRIADO;
 
     if (flag.length === 0) {
       try {
@@ -80,7 +80,7 @@ class PaymentController {
     const clientData = { ...req.body, paymentId: Number(id) };
     const rgxStatus = /^(\s*(CONFIRMADO|CANCELADO)?)$/;
     if (rgxStatus.test(status) === true) {
-      if (status === 'CONFIRMADO') {
+      if (status === STATUS.CONFIRMADO) {
         try {
           const newInvoice = await database.Invoices.create(clientData);
           await database.Payments.update(
@@ -103,7 +103,7 @@ class PaymentController {
         } catch (error) {
           return res.status(500).json(error.message);
         }
-      } else if (status === 'CANCELADO') {
+      } else if (status === STATUS.CANCELADO) {
         try {
           await database.Payments.update(
             { status },
@@ -129,6 +129,7 @@ class PaymentController {
     } else {
       return res.status(400).json('Status inválido');
     }
+    return null;
   }
 }
 module.exports = PaymentController;
