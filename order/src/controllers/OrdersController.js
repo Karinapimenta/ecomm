@@ -41,7 +41,6 @@ class OrdersController {
       await db.Orders.update({ status }, { where: { id: Number(id) } });
       const statusUpdatedOrder = await db.Orders.findOne({ where: { id: Number(id) } });
       const customerInfos = await fetch(`http://ecomm-account:3001/api/users/${statusUpdatedOrder.customerId}`)
-
         .then((response) => response.json());
       await db.Orders.update(
         {
