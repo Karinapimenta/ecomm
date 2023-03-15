@@ -65,5 +65,10 @@ services:
       - mysql
     volumes:
       - ./order:/app-node
+  redis:
+    image: redis
+    container_name: redis-ecomm
+    ports:
+      - 6379:6379
 volumes:
   db-mysql-ecomm:

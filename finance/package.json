@@ -5,6 +5,7 @@
   "main": "./scr/index.js",
   "scripts": {
     "start": "node ./src/server.js",
+    "lint": "eslint src",
     "test": "jest --verbose",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -32,8 +33,12 @@
   },
   "dependencies": {
     "body-parser": "^1.20.1",
+    "dotenv": "^16.0.3",
     "express": "^4.17.3",
+    "jsonwebtoken": "^9.0.0",
     "mysql2": "^3.1.1",
+    "passport": "^0.6.0",
+    "passport-http-bearer": "^1.0.1",
     "path": "^0.12.7",
     "sequelize": "^6.28.0",
     "sequelize-cli": "^6.6.0"

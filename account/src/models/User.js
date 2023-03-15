@@ -15,7 +15,6 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-      match: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,10}$/,
     },
     cpf: {
       type: String,
@@ -45,5 +44,5 @@ const userSchema = new mongoose.Schema(
   },
 );
 
-const Users = mongoose.model('users', userSchema);
-export default Users;
+const User = mongoose.model('users', userSchema);
+export default User;

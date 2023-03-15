@@ -1,7 +1,7 @@
 db.users.insertOne({
     name: "Karina",
     email: "karina@company.com",
-    password:"$2y$10$6jPr7tnWsfPrtfrvqnhGp.MTlxRwh5WegiQuEPduAYZo6fO/WHGGG",
+    password:"superSenha125@4",
     date: ISODate(),
     cpf: "71986318001",
     phone: "31978945621",
@@ -21,7 +21,7 @@ db.users.insertMany([
 {
     name: "Tomás Henrique Rafael Galvão",
     email: "tomas-galvao96@daimler.com",
-    password:"$2y$10$vu2vBtLLo4RlPox94xM7quCDYCAuDfVIh4zfEwzULp3MjqK/Cv8..",
+    password:"$abacate_Gostos0",
     date: ISODate(),
     cpf: "00807646733",
     phone: "31911215661",
@@ -39,7 +39,7 @@ db.users.insertMany([
 {
     name: "Silvana Gabriela Rayssa Assis",
     email: "silvana-assis89@splicenet.com.br",
-    password:"$2y$10$mhGXKeNXbw3kINEj3yDiluWhEJUC6W.JSm.KCXLXQjXXvqpElJe92",
+    password:"euGostoDoRaçaNegr4$_",
     date: ISODate(),
     cpf: "90382829409",
     phone: "31985444541",

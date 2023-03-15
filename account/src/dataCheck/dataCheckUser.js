@@ -41,4 +41,5 @@ class DataCheck {
     }
   }
 }
+
 export default DataCheck;
