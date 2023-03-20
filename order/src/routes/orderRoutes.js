@@ -4,7 +4,7 @@ const authenticationBearer = require('../middlewares/authentication');
 
 const router = Router();
 
-router.post('/orders/', authenticationBearer, OrdersController.saveNewOrder);
+router.post('/orders', authenticationBearer, OrdersController.saveNewOrder);
 router.patch('/orders/:id/:status', authenticationBearer, OrdersController.updateStatusOrderByLink);
 
 module.exports = router;

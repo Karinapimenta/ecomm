@@ -4,7 +4,7 @@ import { Strategy as BearerStrategy } from 'passport-http-bearer';
 import { Strategy as LocalStrategy } from 'passport-local';
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
-import User from '../models/User.js';
+import User from '../models/apiUser.js';
 import { findToken } from '../../redis/tokenList.js';
 
 const localStrategy = new LocalStrategy(

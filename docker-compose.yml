@@ -37,6 +37,13 @@ services:
       - mongo
     volumes:
       - ./account:/app-node
+  api_gateway:
+    build: ./api_gateway
+    container_name: ecomm-apiGateway
+    ports:
+      - 3005:3005
+    depends_on:
+      - mongo  
   mysql:
     image: mysql
     container_name: mysql-ecomm
