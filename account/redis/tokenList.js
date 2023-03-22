@@ -9,7 +9,7 @@ async function addTokenToBlocklist(token) {
 
 async function findToken(token) {
   const result = await client.exists(token);
-  if (result === 1) {
+  if (result === true) {
     throw new jwt.JsonWebTokenError('Token bloqueado');
   }
 }

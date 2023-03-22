@@ -57,7 +57,7 @@ class UserController {
       await addTokenToBlocklist(req.token);
       res.status(204).send();
     } catch (error) {
-      res.status(500).json('Bad Request');
+      res.status(500).json('Internal Server Error');
     }
   };
 
