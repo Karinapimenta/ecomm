@@ -4,10 +4,9 @@ on:
   push:
   pull_request:
     branches: ["main"]
-    
+
 jobs:
   buildDocker: 
-      timeout-minutes: 10 
       runs-on: ubuntu-latest 
 
       steps: 
@@ -17,7 +16,7 @@ jobs:
       
       - uses: actions/setup-node@v3 
         with: 
-        node-version: 18 
+          node-version: 18 
         
       - name: Install dependencies 
         working-directory: ./product 
