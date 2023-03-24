@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: ["main"]
 jobs:
-  build:
+  buildServices:
     runs-on: ubuntu-latest
 
     strategy:
@@ -47,5 +47,5 @@ jobs:
       run: docker-compose -f "docker-compose.yml" up -d --build
 
     - name: Stop containers 
-    if: always() 
-    run: docker-compose -f "docker-compose.yml" down
+      if: always() 
+      run: docker-compose -f "docker-compose.yml" down
