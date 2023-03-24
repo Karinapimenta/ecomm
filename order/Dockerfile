@@ -1,4 +1,4 @@
 FROM node
 COPY . .
 WORKDIR /app-node
-ENTRYPOINT npm run test
+ENTRYPOINT npm start
