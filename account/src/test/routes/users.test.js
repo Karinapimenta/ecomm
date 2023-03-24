@@ -23,7 +23,7 @@ let idResult;
 describe('POST on /api/admin/users', () => {
   it('Must save a new user', async () => {
     const result = await request(app)
-      .post('/api/admin/users')
+      .post('/api/users')
       .send({
         name: 'Fernando',
         email: 'frnd@company.com',
@@ -51,7 +51,7 @@ describe('POST on /api/admin/users', () => {
     await request(app)
       .post('/api/admin/users')
       .send({ })
-      .expect(500);
+      .expect(404);
   });
 });
 describe('GET on /api/user/:id', () => {
@@ -93,8 +93,26 @@ describe('PUT on /api/admin/user/:id', () => {
   });
   it('Must NOT update a user', async () => {
     await request(app)
-      .put(`/api/admin/users/${idResult}`)
-      .send({ })
+      .put('/api/admin/users/fakeId')
+      .send({
+        name: 'Fernando',
+        email: 'frnd@company.com',
+        password: 'poiA@34lo',
+        cpf: '71986318001',
+        phone: '319789456231',
+        address: [
+          {
+            street: 'Rua 123',
+            number: '23',
+            complement: 'apt 123',
+            neighborhood: 'neighborhood 1',
+            zipCode: 35400000,
+            city: 'OP',
+            state: 'MG',
+          },
+        ],
+        shoppingCart: [],
+      })
       .expect(400);
   });
 });

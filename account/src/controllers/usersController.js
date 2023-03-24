@@ -1,16 +1,7 @@
 import bcrypt from 'bcryptjs';
-import jws from 'jsonwebtoken';
 import User from '../models/User.js';
 import DataCheck from '../dataCheck/dataCheckUser.js';
-import { addTokenToBlocklist } from '../../redis/tokenList.js';
 
-async function genToken(user) {
-  const payload = {
-    id: user._id,
-  };
-  const newToken = jws.sign(payload, process.env.APP_SECRET, { expiresIn: '30m' });
-  return newToken;
-}
 class UserController {
   static getUsers = (req, res) => {
     User.find((err, users) => {
@@ -47,23 +38,8 @@ class UserController {
     });
   };
 
-  static userLogin = async (req, res) => {
-    const token = await genToken(req.user);
-    return res.set('Authorization', token).status(204).send();
-  };
-
-  static userLogout = async (req, res) => {
-    try {
-      await addTokenToBlocklist(req.token);
-      res.status(204).send();
-    } catch (error) {
-      res.status(500).json('Internal Server Error');
-    }
-  };
-
   static updateUser = async (req, res) => {
     const { id } = req.params;
-
     const customerInfo = req.body;
     const erros = [];
     DataCheck.emailCheck(customerInfo.email, erros);
@@ -73,7 +49,7 @@ class UserController {
     const salt = await bcrypt.genSalt(12);
     const senhaHash = await bcrypt.hash(customerInfo.password, salt);
     customerInfo.password = senhaHash;
-    let emptyBody = 0;
+    let emptyBody = false;
     if (Object.keys(req.body).length === 0) { emptyBody = true; }
     User.findByIdAndUpdate(id, { $set: customerInfo }, (err) => {
       if (!err && emptyBody === false && erros.length === 0) {
