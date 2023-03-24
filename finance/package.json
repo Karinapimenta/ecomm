@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./src/server.js",
     "lint": "eslint src",
-    "test": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && jest",
+    "test": "npx sequelize-cli db:create && npx sequelize-cli db:migrate && jest --verbose",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "dev": "nodemon ./src/server.js"
