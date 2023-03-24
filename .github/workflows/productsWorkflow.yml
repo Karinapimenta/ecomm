@@ -1,0 +1,31 @@
+name: e-Commerce Products
+
+on: 
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  buildProducts:
+      timeout-minutes: 10 
+      runs-on: ubuntu-latest 
+
+      steps: 
+      - uses: actions/checkout@v3 
+      - name: Start Docker Containers 
+        run: docker-compose -f "docker-compose.yml" up -d --build
+      
+      - uses: actions/setup-node@v3 
+        with: 
+          node-version: 18 
+        
+      - name: Install dependencies 
+        working-directory: ./product 
+        run: npm install 
+      
+      - name: Run tests 
+        working-directory: ./product
+        run: npm test 
+
+      - name: Stop containers 
+        run: docker-compose -f "docker-compose.yml" down
+  

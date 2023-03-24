@@ -9,7 +9,7 @@ async function genToken(user) {
   return newToken;
 }
 
-class apiGatewayController {
+class ApiGatewayController {
 static userLogin = async (req, res) => {
   const token = await genToken(req.user);
   return res.set('Authorization', token).status(204).send();
@@ -24,4 +24,4 @@ static userLogout = async (req, res) => {
   }
 };
 }
-export default apiGatewayController;
+export default ApiGatewayController;
