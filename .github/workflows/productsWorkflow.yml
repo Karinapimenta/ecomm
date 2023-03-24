@@ -1,12 +1,12 @@
 name: e-Commerce Products
 
 on: 
-  push:
   pull_request:
     branches: ["main"]
 
 jobs:
-  buildDocker: 
+  buildProducts:
+      timeout-minutes: 10 
       runs-on: ubuntu-latest 
 
       steps: 
